@@ -60,7 +60,14 @@ char *token_start(char *str){
 
 /* Returns a fresly allocated new zero-terminated string 
    containing <len> chars from <inStr> */
-char *copy_str(char *inStr, short len);
+    char *copy_str(char *inStr, short len){
+      char *str_copy = malloc(len +1) /*len+1 to store end char*/
+      for (short i=0; i< len; i++) {
+	 str_copy[i] = inStr[i];
+	}
+      str_copy[len] = '\0'; /*last entry*/
+      return str_copy;
+    }
 
 /* Returns a freshly allocated zero-terminated vector of freshly allocated 
    space-separated tokens from zero-terminated str.
