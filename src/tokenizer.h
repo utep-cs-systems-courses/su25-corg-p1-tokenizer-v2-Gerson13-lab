@@ -79,16 +79,25 @@ char *copy_str(char *inStr, short len){
      tokens[3] = 0
 */
 char **tokenize(char* str){
-      int count = count_tokens(str);
-      char **tokens = malloc((count+1)* sizeof(char *));
-      char *start = token_start(str);
-      char *end = token_terminator(start);
-      int len = end-start;
+   int count = count_tokens(str);
+   char **tokens = malloc((count + 1) * sizeof(char *));
 
-      for(int i=0;i<count;i++){
-	tokens[i] = copy_str(token_start(str);
-      
+    char *start = token_start(str);
+    int i = 0;
 
+    while (start) {
+        char *end = token_terminator(start);
+        int len = end - start;
+
+        tokens[i] = copy_str(start, len);  // copy current token
+        i++;
+
+        start = token_start(end);  // move to next token
+    }
+
+    tokens[i] = NULL;  // zero-terminate the token array
+    return tokens;
+ 
 }
  /* Prints all tokens. */
 void print_tokens(char **tokens);
