@@ -2,6 +2,7 @@
 #define _HISTORY_
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 typedef struct s_Item {
   int id;
@@ -31,12 +32,12 @@ void add_history(List *list, char *str){
   new_item -> str = strdup(str); /*allocates memory for string */
   new_item -> next = NULL;
 
-  if (list -> root = NULL){
+  if (list -> root == NULL){
     list -> root = new_item;
   }
   else {
     Item *current= list -> root;
-    while (current -> next != NULL){
+    while (current -> next){
       current = current -> next;
     }
     current -> next = new_item;

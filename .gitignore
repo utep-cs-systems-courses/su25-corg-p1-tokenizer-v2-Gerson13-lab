@@ -1,8 +1,10 @@
 # Prerequisites
 *.d
 
+
 # Object files
 *.o
+*~
 *.ko
 *.obj
 *.elf
@@ -50,3 +52,5 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+main
+history.g
