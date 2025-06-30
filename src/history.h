@@ -16,7 +16,6 @@ List* init_history(){
   List* history = (List*)malloc(sizeof(List));
   history -> root = NULL; /*initlizes root to null*/
   return history;
-
 }
 /* Add a history item to the end of the list.
    List* list - the linked list
@@ -55,9 +54,24 @@ char *get_history(List *list, int id){
 }
 
 /*Print the entire contents of the list. */
-void print_history(List *list);
+void print_history(List *list){
+  Item *current = list -> root;
+  while (current) {
+      printf("%d: %s\n", current -> id, current -> str);
+      current = current - >next;
+  }
+}
 
 /*Free the history list and the strings it references. */
-void free_history(List *list);
+void free_history(List *list){
+  Item *current = list -> root;
+  while (current) {
+      Item *next = current -> next;
+      free(current -> str);
+      free(current);
+      current = next;
+  }
+  free(list);
+}
 
 #endif
