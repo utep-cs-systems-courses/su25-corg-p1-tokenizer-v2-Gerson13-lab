@@ -58,7 +58,7 @@ void print_history(List *list){
   Item *current = list -> root;
   while (current) {
       printf("%d: %s\n", current -> id, current -> str);
-      current = current - >next;
+      current = current -> next;
   }
 }
 
