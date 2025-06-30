@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Lab Project 1: Building a Tokenizer
 ===================================
 A related demo program is in directory "sortArgDemo".  All encouraged
@@ -152,3 +153,17 @@ Overall, a user should be able to:
 You should define each function from the **history.h** header file in
 a separate history.c file and then incorporate the history with your
 tokenizer and interface.
+=======
+Project 1: Tokenizer
+====================
+# Instructions:
+
+You should document your tokenizer in this file.
+
+This file is written in the refreshingly simple `markdown` text
+formatting language.
+
+To learn about text formatting using markdown, we encourage you to examine 
+ - [../README.md](../README.md)
+ - the online [Markdown Guide](https://www.markdownguide.org/).
+>>>>>>> All files updated
