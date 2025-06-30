@@ -1,5 +1,8 @@
 #ifndef _HISTORY_
 #define _HISTORY_
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 typedef struct s_Item {
   int id;
@@ -13,63 +16,66 @@ typedef struct s_List {
 
 /* Initialize the linked list to keep the history. */
 List* init_history(){
-  List* history = (List*)malloc(sizeof(List));
+  List *history = (List*)malloc(sizeof(List));
   history -> root = NULL; /*initlizes root to null*/
   return history;
 }
+
 /* Add a history item to the end of the list.
    List* list - the linked list
    char* str - the string to store
 */
 void add_history(List *list, char *str){
-  static int counter = 0;
-  Item *new_item -> id = counter++;
-  new_item -> str = strdup(str); /*allocates memory for str*/
+  static int counter = 0 /* holds current counter */;
+  Item *new_item = (Item*)malloc(sizeof(Item));
+  new_item -> id = counter++;
+  new_item -> str = strdup(str); /*allocates memory for string */
   new_item -> next = NULL;
 
-  if(list -> root = NULL){
+  if (list -> root == NULL){
     list -> root = new_item;
   }
   else {
-    Item *current = list -> root;
-    while(current) {
+    Item *current= list -> root;
+    while (current -> next){
       current = current -> next;
     }
     current -> next = new_item;
   }
+  
 }
 
 /* Retrieve the string stored in the node where Item->id == id.
    List* list - the linked list
    int id - the id of the Item to find */
 char *get_history(List *list, int id){
-  Item *current = list -> root; /*gets first item of list*/
-  while(current){
-    if(current -> id == id){
+  Item *current = list -> root; /*gets item of list*/
+  while (current){
+    if (current -> id == id){
       return current -> str;
     }
-    current = current -> next /*goes to next entry if id dont match*/
+    current = current -> next; /*goes to next entry if id dont match */
   }
-  return NULL; /*id not found in list*/;
+  return NULL; /*id number was not found*/
 }
 
 /*Print the entire contents of the list. */
 void print_history(List *list){
-  Item *current = list -> root;
-  while (current) {
-      printf("%d: %s\n", current -> id, current -> str);
-      current = current -> next;
+  Item *current = list ->root;
+  while (current){
+    printf("%d: %s\n", current -> id, current -> str);
+    current = current -> next;
   }
 }
 
 /*Free the history list and the strings it references. */
 void free_history(List *list){
   Item *current = list -> root;
-  while (current) {
-      Item *next = current -> next;
-      free(current -> str);
-      free(current);
-      current = next;
+  while(current) {
+    Item *next = current -> next;
+    free(current -> str);
+    free(current);
+    current = current -> next;
   }
   free(list);
 }
