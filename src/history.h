@@ -12,8 +12,13 @@ typedef struct s_List {
 } List;
 
 /* Initialize the linked list to keep the history. */
-List* init_history();
+List* init_history(){
+  List* history = (List*)malloc(sizeof(List));
+  history -> root = NULL; /*initlizes root to null*/
+  return history;
 
+
+}
 /* Add a history item to the end of the list.
    List* list - the linked list
    char* str - the string to store
