@@ -39,7 +39,7 @@ char *token_terminator(char *token){
     if (!token){ return NULL;}
     
     char *p = token;
-    while (*p != '\0' && non_space_char(*p){
+    while (*p != '\0' && non_space_char(*p)){
 	p++;
       }
       return p;
