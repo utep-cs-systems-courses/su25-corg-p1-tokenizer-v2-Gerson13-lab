@@ -100,9 +100,25 @@ char **tokenize(char* str){
  
 }
  /* Prints all tokens. */
-void print_tokens(char **tokens);
+void print_tokens(char **tokens){
+  char **p = tokens;
+  while(*p){
+	  printf("%s\n", *p);
+          p++;      
+  }
+}
 
 /* Frees all tokens and the vector containing themx. */
-void free_tokens(char **tokens);
+void free_tokens(char **tokens){
+	 char **p = tokens;
+    while (*p) {
+        free(*p);  // free each token string
+        p++;
+    }
+    free(tokens); // free the array of pointers
+}
+
+
+
 
 #endif
