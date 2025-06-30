@@ -1,5 +1,7 @@
 #ifndef _TOKENIZER_
 #define _TOKENIZER_
+#include <stdlib.h>
+#include <string.h>
 
 
 /* Return true (non-zero) if c is a whitespace characer
@@ -24,7 +26,7 @@ int non_space_char(char c)
    str does not contain any tokens. */
 char *token_start(char *str){
   char *p = str; 
-  while(space_char(*p){
+  while(space_char(*p)){
       p++;
     }
   if (*p == '\0'){
@@ -39,7 +41,7 @@ char *token_terminator(char *token){
     if (!token){ return NULL;}
     
     char *p = token;
-    while (*p != '\0' && non_space_char(*p){
+    while (*p != '\0' && non_space_char(*p)){
 	p++;
       }
       return p;
@@ -61,12 +63,12 @@ int count_tokens(char *str){
 /* Returns a fresly allocated new zero-terminated string 
    containing <len> chars from <inStr> */
 char *copy_str(char *inStr, short len){
-      char *str_copy = malloc(len +1) /*len+1 to store end char*/
-      for (short i=0; i< len; i++) {
-	 str_copy[i] = inStr[i];
-	}
-      str_copy[len] = '\0'; /*last entry*/
-      return str_copy;
+  char *str_copy = malloc(len +1); /*len+1 to store end char*/
+  for (short i=0; i< len; i++) {
+    str_copy[i] = inStr[i];
+  }
+  str_copy[len] = '\0'; /*last entry*/
+  return str_copy;
 }
 
 /* Returns a freshly allocated zero-terminated vector of freshly allocated 
@@ -80,20 +82,39 @@ char *copy_str(char *inStr, short len){
 */
 char **tokenize(char* str){
       int count = count_tokens(str);
-      char **tokens = malloc((count+1)* sizeof(char *));
+      char **tokens = malloc((count+1) * sizeof(char *));
       char *start = token_start(str);
-      char *end = token_terminator(start);
-      int len = end-start;
+      int i=0;
 
-      for(int i=0;i<count;i++){
-	tokens[i] = copy_str(token_start(str);
-      
+      while(start){
+	char *end = token_terminator(start);
+	int len = end - start;
 
+	tokens[i] = copy_str(start, len);
+	i++;
+	start = token_start(end);
+      }
+      tokens[i] = NULL;
+      return tokens;
 }
+ 
  /* Prints all tokens. */
-void print_tokens(char **tokens);
+ void print_tokens(char **tokens){
+   char **p = tokens;
+   while(*p){
+     printf("%s\n", *p);
+     p++;
+   }
+}
 
 /* Frees all tokens and the vector containing themx. */
-void free_tokens(char **tokens);
+void free_tokens(char **tokens){
+  char **p = tokens;
+  while(*p){
+    free(*p);
+    p++;
+  }
+  free(tokens);
+}
 
 #endif

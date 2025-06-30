@@ -1,0 +1,13 @@
+CFLAGS=-g -O3
+
+all: tester
+
+#build
+tester: tester.o
+	cc -o tester tester.o $(CFLAGS)
+
+tester.o: tester.c tokenizer.h history.h
+	cc -c tester.c $(CFLAGS)
+
+clean:
+	rm -f *.o tester
